@@ -1,0 +1,40 @@
+from student_reg import Course
+
+# get_valid_age, create_student
+
+# main menu 
+
+from student_reg import Course, create_student, get_valid_age  # Import necessary functions
+
+def view_courses(courses):
+    for index, course in enumerate(courses, start=1):
+        print(f"{index}. {course.subject}")
+
+def main_menu():
+    courses = [Course("Computer Science"), Course("English Literature"), Course("Spanish"),
+               Course("Physics"), Course("History"), Course("Sociology"),
+               Course("Chemistry"), Course("French")]
+    
+    print("\n--- Welcome to the student registration system ---\n")
+    print("--- Main Menu ---\n")
+    print("1. View Courses\t\t\t2. Add Student\n3. View Enrolled Students\t4. Exit Program")
+
+    while True:
+        menu = input("Please choose an option: ")
+        if menu == "1":
+            view_courses(courses)
+        elif menu == "2":
+            new_student, selected_course = create_student(courses)  # This assumes create_student is adjusted to accept 'courses'
+            print(f"Added new student: {new_student.name}, age: {new_student.age}, subject: {new_student.subject}")
+            selected_course.print_enrolled_students()
+        elif menu == "3":
+            for course in courses:
+                course.print_enrolled_students()
+        elif menu == "4":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid option, please try again.")
+
+if __name__ == "__main__":
+    main_menu()
